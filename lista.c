@@ -46,10 +46,10 @@ void quartaOpcao(int matriz[20][9]) {
 	}
 }
 
-void quintaOpcao(int matriz[20][9]){
-    int totalMoradores = 0;
-    
-    for (int i = 0; i < 20; i++) {
+void quintaOpcao(int matriz[20][9]) {
+	int totalMoradores = 0;
+
+	for (int i = 0; i < 20; i++) {
 		for (int j = 0; j < 9; j++) {
 			totalMoradores+=matriz[i][j];
 		}
@@ -57,15 +57,57 @@ void quintaOpcao(int matriz[20][9]){
 	printf("Existem %d pessoas morando no predio.\n", totalMoradores);
 }
 
-void sextaOpcao(int matriz[20][9]){
-    
-    int totalAndar[20] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-    for (int i = 0; i < 20; i++) {
+void sextaOpcao(int matriz[20][9]) {
+	int totalAndar[20] = {0};
+
+	for (int i = 0; i < 20; i++) {
 		for (int j = 0; j < 9; j++) {
-			totalAndar[i]+=matriz[i][j];
+			totalAndar[i] += matriz[i][j];
 		}
 	}
+
+	for (int i = 0; i < 20; i++) {
+		printf("Total de moradores do andar %d: %d\n", i+1, totalAndar[i]);
+	}
 }
+
+void setimaOpcao(int matriz[20][9]) {
+	int encontrou = 0;
+	for (int i = 0; i < 20; i++) {
+		for (int j = 0; j < 9; j++) {
+			if (matriz[i][j] == 0) {
+				printf("A unidade %d do andar %d esta vazia.\n", j+1, i+1);
+				encontrou = 1;
+			}
+		}
+	}
+	if (!encontrou) {
+		printf("Nao ha apartamentos vazios.\n");
+	}
+}
+
+void oitavaOpcao(int matriz[20][9]) {
+	int maxMoradores = -1;
+	int andarMax = -1;
+	int unidadeMax = -1;
+
+	for (int i = 0; i < 20; i++) {
+		for (int j = 0; j < 9; j++) {
+			if (matriz[i][j] > maxMoradores) {
+				maxMoradores = matriz[i][j];
+				andarMax = i + 1;   // Ajuste para o usuC!rio (1 a 20)
+				unidadeMax = j + 1; // Ajuste para o usuC!rio (1 a 9)
+			}
+		}
+	}
+
+	if (maxMoradores > 0) {
+		printf("O apartamento com maior numero de moradores e a unidade %d do andar %d.\n", unidadeMax, andarMax);
+	} else {
+		printf("Todos os apartamentos estao vazios.\n");
+	}
+}
+
 
 int main() {
 	int opcao;
@@ -112,11 +154,11 @@ int main() {
 			break;
 
 		case 7:
-			printf("Executando opcao 2...\n");
+			setimaOpcao(matriz);
 			break;
 
 		case 8:
-			printf("Executando opcao 2...\n");
+			oitavaOpcao(matriz);
 			break;
 
 		case 9:
